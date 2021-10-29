@@ -1,12 +1,20 @@
-//Copyright 2021 Enigma
+//Copyright by Pepchik 2021
 
-#ifndef INCLUDE_STUDENT_HPP_
-#define INCLUDE_STUDENT_HPP_
+#ifndef INCLUDE_HEADER_HPP_
+#define INCLUDE_HEADER_HPP_
 
-#include "header.hpp"
+#include <string>
+#include <any>
+#include <iostream>
+#include <fstream>
+#include <nlohmann/json.hpp>
 #include <vector>
 #include <string>
+
+
 using nlohmann::json;
+
+json JSON_taking(int argc, char** argv);
 
 struct Student {
  public:
@@ -33,5 +41,6 @@ void print(std::vector<Student>& students, std::ostream& os);
 void from_json(const json& j, Student& s);
 
 
-std::vector<Student> parsingJson(json& data);
-#endif  //INCLUDE_STUDENT_HPP_
+std::vector<Student> JSON_parsing(json& data);
+
+#endif // INCLUDE_HEADER_HPP_

@@ -1,20 +1,20 @@
 {
   "items": [
     {
-      "name": "Akakiy Akaki",
-      "group": "2",
-      "avg": "5.25",
+      "name": "Nikita Orlov",
+      "group": "32",
+      "avg": "1.23",
       "debt":  [
+        "Java",
         "JavaScript",
-        "C++",
-        "Games"
+        "Bash"
       ]
     },
     {
-      "name": "Ded Asambler",
-      "group": 32,
-      "avg": 3.75,
-      "debt": "asembler"
+      "name": "Geralt",
+      "group": 1,
+      "avg": 50.05,
+      "debt": "withcer"
     }
   ],
   "_meta": {

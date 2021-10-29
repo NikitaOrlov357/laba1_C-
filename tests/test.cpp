@@ -1,11 +1,10 @@
-//Copyright 2021 Enigma
+//Copyright by Pepchik 2021
 
 #define TEST_CPP_
 #ifdef TEST_CPP_
 
-
 #include <gtest/gtest.h>
-#include "header.hpp"
+
 #include <Student.hpp>
 
 
@@ -44,16 +43,16 @@ TEST(printTest, json)
   std::string jsonData = "{\n"
       "  \"items\": [\n"
       "    {\n"
-      "      \"name\": \"Akakiy Akaki\",\n"
-      "      \"group\": \"UI8-32\",\n"
-      "      \"avg\": \"5.25\",\n"
+      "      \"name\": \"Nikita Orlov\",\n"
+      "      \"group\": \"UI2-32\",\n"
+      "      \"avg\": \"10.05\",\n"
       "      \"debt\": null\n"
       "    },\n"
       "    {\n"
-      "      \"name\": \"Ded Asambler\",\n"
-      "      \"group\": 32,\n"
-      "      \"avg\": 3.75,\n"
-      "      \"debt\": \"asembler\"\n"
+      "      \"name\": \"Last Guardian\",\n"
+      "      \"group\": 99,\n"
+      "      \"avg\": 99.99,\n"
+      "      \"debt\": \"all\"\n"
       "    }\n"
       "  ],\n"
       "  \"_meta\": {\n"
@@ -61,14 +60,14 @@ TEST(printTest, json)
       "  }\n"
       "}";
   nlohmann::json _json = json::parse(jsonData);
-  std::vector<Student> students_parsed = parsingJson(_json);
+  std::vector<Student> students_parsed = JSON_parsing(_json);
   std::stringstream ss;
   print(students_parsed, ss);
   ASSERT_EQ("| name                | group     | avg       | debt      |\n"
       "|---------------------|-----------|-----------|-----------|\n"
-      "| Akakiy Akaki        | UI8-32    | 5.25      | null      |\n"
+      "| Nikita Orlov        | UI2-32    | 10.05     | null      |\n"
       "|---------------------|-----------|-----------|-----------|\n"
-      "| Ded Asambler        | 32        | 3.75      | asembler  |\n"
+      "| Last Guardian       | 99        | 99.99     | all       |\n"
       "|---------------------|-----------|-----------|-----------|\n", ss.str());
 }
 
@@ -77,51 +76,51 @@ TEST(parseTest, jsonParse)
   std::string jsonData = "{\n"
       "  \"items\": [\n"
       "    {\n"
-      "      \"name\": \"Akakiy Akaki\",\n"
-      "      \"group\": \"UI8-32\",\n"
-      "      \"avg\": \"5.25\",\n"
+      "      \"name\": \"Nikita Orlov\",\n"
+      "      \"group\": \"UI2-32\",\n"
+      "      \"avg\": \"10.05\",\n"
       "      \"debt\": null\n"
       "    },\n"
       "    {\n"
-      "      \"name\": \"Ded Asambler\",\n"
-      "      \"group\": 32,\n"
-      "      \"avg\": 3.75,\n"
-      "      \"debt\": \"asembler\"\n"
+      "      \"name\": \"Last Guardian\",\n"
+      "      \"group\": 99,\n"
+      "      \"avg\": 99.99,\n"
+      "      \"debt\": \"all\"\n"
       "    }\n"
       "  ],\n"
       "  \"_meta\": {\n"
       "    \"count\": 2\n"
       "  }\n"
       "}";
-    nlohmann::json _json = json::parse(jsonData);
-    std::vector<Student> students_parsed = parsingJson(_json);
-    std::vector<Student> student_inited = {
-        Student("Akakiy Akaki", (std::string)"UI8-32",
-                (std::string)"5.25", nullptr),
-        Student("Ded Asambler", (size_t)32,
-                (double)3.75, (std::string)"asembler")
-    };
-    ASSERT_EQ(student_inited, students_parsed);
+  nlohmann::json _json = json::parse(jsonData);
+  std::vector<Student> students_parsed = JSON_parsing(_json);
+  std::vector<Student> student_inited = {
+      Student("Nikita Orlov", (std::string)"UI2-32",
+              (std::string)"10.05", nullptr),
+      Student("Last Guardian", (size_t)99,
+              (double)99.99, (std::string)"all")
+  };
+  ASSERT_EQ(student_inited, students_parsed);
 }
 TEST(parseTest, fromFile)
 {
   std::string jsonData = "{\n"
       "  \"items\": [\n"
       "    {\n"
-      "      \"name\": \"Akakiy Akaki\",\n"
-      "      \"group\": \"2\",\n"
-      "      \"avg\": \"5.25\",\n"
+      "      \"name\": \"Nikita Orlov\",\n"
+      "      \"group\": \"32\",\n"
+      "      \"avg\": \"1.23\",\n"
       "      \"debt\":  [\n"
       "        \"Java\",\n"
-      "        \"C++\",\n"
-      "        \"Games\"\n"
+      "        \"JavaScript\",\n"
+      "        \"Bash\"\n"
       "      ]\n"
       "    },\n"
       "    {\n"
-      "      \"name\": \"Ded Asembler\",\n"
-      "      \"group\": 32,\n"
-      "      \"avg\": 3.75,\n"
-      "      \"debt\": \"asembler\"\n"
+      "      \"name\": \"Geralt\",\n"
+      "      \"group\": 1,\n"
+      "      \"avg\": 50.05,\n"
+      "      \"debt\": \"withcer\"\n"
       "    }\n"
       "  ],\n"
       "  \"_meta\": {\n"
@@ -132,7 +131,7 @@ TEST(parseTest, fromFile)
   std::string path = JSON_DIR;
   path+="/test1.json";
   char* argv[] ={(char*)"", (char*)(path.c_str())};
-  nlohmann::json json2 = takeJson(2, argv);
+  nlohmann::json json2 = JSON_taking(2, argv);
   ASSERT_EQ(json1, json2) << "Test passed!";
 }
 
@@ -142,7 +141,7 @@ TEST(errorCheck, lessArgsTest)
     std::string path = JSON_DIR;
     path+="/test1.json";
     char* argv[] ={(char*)"", (char*)(path.c_str())};
-    nlohmann::json json2 = takeJson(1, argv);
+    nlohmann::json json2 = JSON_taking(1, argv);
     FAIL() << "Expected: The file path was not passed";
   }
   catch(std::runtime_error const & err) {
@@ -159,7 +158,7 @@ TEST(errorCheck, _metaCheck)
     std::string path = JSON_DIR;
     path+="/test2.json";
     char* argv[] ={(char*)"", (char*)(path.c_str())};
-    nlohmann::json json2 = takeJson(2, argv);
+    nlohmann::json json2 = JSON_taking(2, argv);
     FAIL() << "Expected: _meta value does not match the array size";
   }
   catch(std::runtime_error const & err) {

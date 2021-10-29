@@ -33,8 +33,8 @@ find_package(nlohmann_json CONFIG REQUIRED)
 
 add_library(${PROJECT_NAME} STATIC
   # enum your files and delete this comment
-  ${CMAKE_CURRENT_SOURCE_DIR}/sources/source.cpp
-        sources/Student.cpp include/Student.hpp sources/string.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        sources/Student.cpp include/Student.hpp)
 target_link_libraries(${PROJECT_NAME} nlohmann_json::nlohmann_json)
 
 
