@@ -1,13 +1,13 @@
-#include "iostream"
-#include "header.hpp"
-#include "Student.hpp"
-#include <vector>
+//Copyright by Pepchik 2021
 
+#include <vector>
+#include "Student.hpp"
+#include "iostream"
 
 int main(int argc, char** argv)
 {
-  nlohmann::json data = takeJson(argc, argv);
-  std::vector<Student> students = parsingJson(data);
+  nlohmann::json base = JSON_taking(argc, argv);
+  std::vector<Student> students = JSON_parsing(base);
   print(students, std::cout);
 }
 
