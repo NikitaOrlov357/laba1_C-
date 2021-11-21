@@ -1,4 +1,4 @@
-// Copyright 2021 Enigma
+// Copyright 2021 Nik
 
 #include "Student.hpp"
 #include <iomanip>

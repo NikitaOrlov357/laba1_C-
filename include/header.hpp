@@ -1,4 +1,4 @@
-//Copyright 2021 Enigma
+//Copyright 2021 Nik
 
 #ifndef INCLUDE_HEADER_HPP_
 #define INCLUDE_HEADER_HPP_
